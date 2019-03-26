@@ -57,7 +57,7 @@ public class StringBufferTest1 {
 		//String findstr = "오라클";
 		String replaceStr = "java";
 		
-		// 방법 1)
+		// 방법 1) (StringBuffer X)
 		String str1, str2, str3;
 		int index = str.indexOf(findstr);
 		
@@ -70,12 +70,10 @@ public class StringBufferTest1 {
 			System.out.println(findstr + "은 없습니다.");
 		}
 		
-		// 방법 2
-		StringBuffer sb2 = new StringBuffer(str);
-		int findResult = sb2.indexOf(findstr);
-		
-		if (findResult != -1) {
-			str = sb2.replace(findResult, findResult + findstr.length(), replaceStr).toString();
+		// 방법 2) (StringBuffer O)
+		if (index != -1) {
+			StringBuffer sb2 = new StringBuffer(str);
+			str = sb2.replace(index, index + findstr.length(), replaceStr).toString();
 			System.out.println(str);
 		} else {
 			System.out.println(findstr + "은 없습니다.");
