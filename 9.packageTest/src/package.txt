@@ -1,0 +1,62 @@
+*. Package : window상에서의 folder
+
+1. 비슷한 기능을 가진 class들의 묶음
+
+2. class의 첫 줄에 package를 지정  ( package packagename; )
+   packagename : site 주소를 거꾸로.특정이름;
+   
+예) package com.kitri.member;
+    package com.kitri.board;
+    package com.kitri.product;
+(다중 사용 불가능)
+
+
+package com.kitri.test;
+
+public class Car {}
+
+
+- com
+ - kitri
+  - test
+   - Car.class
+
+
+3. package로 지정된 클래스 사용 (import 키워드 사용)
+   단, java.lang 패키지는 자동 import 되어있음 (import 없이 사용 가능)
+   
+예) import packagename.ClassName;
+    import packagename.*;
+    
+
+import com.kitri.test.Car;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+//import java.util.*;
+
+public class CarUser {
+
+	Car car;
+	
+	Calendar cal = new GregorianCalendar();
+}
+
+
+*. jar file : class들을 묶은 파일
+
+연동 방법) <1> jre 설치 파일에 jar 파일 놓기 [jre\lib\ext]
+             <2> CLASSPATH 환경변수에 jar 파일 추가
+             
+생성 방법) <1> export -> jar file -> 경로설정 -> 생성
+             <2> cmd 사용  (class 파일 있는 bin 경로 -> jar -cvf ***.jar *.class)
+             
+             
+*. java의 package
+
+0) java.lang : 기본 package
+1) java.awt : abstract window toolkit (window창, ...)
+2) java.io : Input/Output
+3) java.util : utility
+4) java.net : network
+5) java.sql : JDBC
