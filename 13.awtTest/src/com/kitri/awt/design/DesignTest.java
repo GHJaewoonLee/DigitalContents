@@ -12,8 +12,6 @@ import java.awt.Panel;
 import java.awt.TextArea;
 import java.awt.TextField;
 
-import javax.swing.plaf.FontUIResource;
-
 
 // 1. Frame 상속
 // 2. 선언부에 필요한 객체 생성
@@ -22,6 +20,7 @@ import javax.swing.plaf.FontUIResource;
 // 5. 모든 작업 완료 후에 setVisible
 
 
+@SuppressWarnings("serial")
 public class DesignTest extends Frame {
 	// 선언부
 	
@@ -73,8 +72,6 @@ public class DesignTest extends Frame {
 		add(pS, "South");
 		
 		setBounds(300, 200, 300, 400);
-//		setLocation(300, 200);
-		setSize(300, 400);
 		setResizable(false);
 		setVisible(true);
 	}

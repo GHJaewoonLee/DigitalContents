@@ -1,4 +1,4 @@
-package com.kitri.awt.design;
+package com.kitri.awt.event;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -9,15 +9,20 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+
+// CheckBox Group 변경 시 Choice 항목도 변경
 
 
 @SuppressWarnings("serial")
-public class ItemTest extends Frame {
+public class ItemTest extends Frame implements ItemListener, ActionListener {
 
 	Panel pS = new Panel();
 	Panel pN = new Panel();
-	//Panel pN1 = new Panel();
-	//Panel pN2 = new Panel();
 	
 	CheckboxGroup cg = new CheckboxGroup();
 	Checkbox mor = new Checkbox("아침", cg, true);
@@ -48,23 +53,6 @@ public class ItemTest extends Frame {
 		pN.add(banana);
 		pN.add(strawberry);
 		
-		/*
-		pN.setLayout(new GridLayout(2, 1, 10, 5));
-		
-		pN1.setLayout(new GridLayout(1, 3));
-		pN1.add(mor);
-		pN1.add(aft);
-		pN1.add(eve);
-		
-		pN2.setLayout(new GridLayout(1, 3));
-		pN2.add(app);
-		pN2.add(banana);
-		pN2.add(strawberry);
-		
-		pN.add(pN1);
-		pN.add(pN2);
-		*/
-		
 		ch.addItem(mor.getLabel());
 		ch.addItem(aft.getLabel());
 		ch.addItem(eve.getLabel());
@@ -79,10 +67,57 @@ public class ItemTest extends Frame {
 		
 		setBounds(300, 200, 300, 500);
 		setVisible(true);
+		
+		
+		exit.addActionListener(this);
+		
+		mor.addItemListener(this);
+		aft.addItemListener(this);
+		eve.addItemListener(this);
+		app.addItemListener(this);
+		banana.addItemListener(this);
+		strawberry.addItemListener(this);
+		ch.addItemListener(this);
 	}
 	
 	
 	public static void main(String[] args) {
 		new ItemTest();
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.exit(0);
+	}
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		Object ob = e.getSource();
+		
+		if (ob == ch) {
+			String str = ch.getSelectedItem();
+			
+			switch (str) {
+				case "아침" : mor.setState(true); break;
+				case "점심" : aft.setState(true); break;
+				case "저녁" : eve.setState(true); break;
+			}
+		}
+		
+		Checkbox sel = cg.getSelectedCheckbox();
+		String selStr = sel.getLabel();
+		
+		ta.setText("-- " + selStr + " --\n");
+		ta.append("1. 사과 : " + eatFood(app.getState()) + "\n");
+		ta.append("2. 바나나 : " + eatFood(banana.getState()) + "\n");
+		ta.append("3. 딸기 : " + eatFood(strawberry.getState()) + "\n");
+		
+		ch.select(selStr);
+	}
+	
+	private String eatFood(boolean flag) {
+		return flag ? "먹었다." : "안 먹었다.";
 	}
 }

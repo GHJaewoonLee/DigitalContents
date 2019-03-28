@@ -2,18 +2,20 @@ package com.kitri.awt.design;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
-import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.List;
 import java.awt.Panel;
-import java.awt.TextArea;
 import java.awt.TextField;
 
 
+@SuppressWarnings("serial")
 public class ListTest extends Frame {
 	
-	TextArea listL = new TextArea();
-	TextArea listR = new TextArea();
+	List listL = new List();
+	List listR = new List();
 	
 	Button btR = new Button("¢¹");
 	Button btRAll = new Button("¢º");
@@ -23,36 +25,45 @@ public class ListTest extends Frame {
 	TextField tfL = new TextField();
 	TextField tfR = new TextField();
 	
-	Panel pN1 = new Panel();
-	Panel pN2 = new Panel();
-	Panel pN3 = new Panel();
+	Panel p1 = new Panel();
+	Panel p2 = new Panel();
+	Panel p3 = new Panel();
+	
+	Font f = new Font("±¼¸²", Font.BOLD, 20);
 	
 	
 	public ListTest() {
 		super("List Test !!!");
 		
-		setLayout(new GridLayout(1, 3, 10, 10));
+		setLayout(new GridLayout(1, 3, 10, 0));
 		
-		pN1.setLayout(new BorderLayout());
-		pN1.add(listL, "West");
-		pN1.add(tfL, "South");
+		p1.setLayout(new BorderLayout(0, 10));
+		p1.add(listL, "Center");
+		p1.add(tfL, "South");
 		
-		pN2.setLayout(new GridLayout(4, 1, 20, 20));
-		pN2.add(btR);
-		pN2.add(btRAll);
-		pN2.add(btL);
-		pN2.add(btLAll);
+		btR.setFont(f);
+		btRAll.setFont(f);
+		btL.setFont(f);
+		btLAll.setFont(f);
 		
-		pN3.setLayout(new BorderLayout());
-		pN3.add(listR, "East");
-		pN3.add(tfR, "South");
+		//p2.setLayout(new GridLayout(4, 1, 0, 20));
 		
-		add(pN1, "West");
-		add(pN2, "Center");
-		add(pN3, "East");
+		p2.setLayout(new GridLayout(6, 1, 0, 20));
+		p2.add(new Label(""));
+		p2.add(btR);
+		p2.add(btRAll);
+		p2.add(btL);
+		p2.add(btLAll);
 		
-		setBounds(300, 200, 300, 400);
-		setResizable(true);
+		p3.setLayout(new BorderLayout(0, 10));
+		p3.add(listR, "Center");
+		p3.add(tfR, "South");
+		
+		add(p1);
+		add(p2);
+		add(p3);
+		
+		setBounds(300, 200, 300, 500);
 		setVisible(true);
 	}
 	

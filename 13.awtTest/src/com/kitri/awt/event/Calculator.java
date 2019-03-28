@@ -1,4 +1,4 @@
-package com.kitri.awt.design;
+package com.kitri.awt.event;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -99,8 +99,8 @@ public class Calculator extends Frame implements MouseListener {
 				case '*' :
 				case '/' : if (!operL.getText().isEmpty()) {
 							   second = Integer.parseInt(numL.getText());
-							   second = calcTwoNumber(first, operL.getText().charAt(0), second);
-							   numL.setText("" + second);
+							   first = calcTwoNumber(first, operL.getText().charAt(0), second);
+							   numL.setText("" + first);
 							   operL.setText(((Button)c).getLabel());
 							   isOperation = true;
 							   break;

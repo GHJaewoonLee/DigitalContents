@@ -1,4 +1,4 @@
-package com.kitri.awt.design;
+package com.kitri.awt.event;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -8,10 +8,12 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Scrollbar;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
 
 @SuppressWarnings("serial")
-public class ColorSelector extends Frame {
+public class ColorSelector extends Frame implements AdjustmentListener {
 
 	Label lR = new Label("ª°∞≠", Label.CENTER);
 	Label lG = new Label("√ ∑œ", Label.CENTER);
@@ -72,16 +74,32 @@ public class ColorSelector extends Frame {
 		setBounds(300, 200, 500, 400);
 		setVisible(true);
 		
+		
+		sbR.addAdjustmentListener(this);
+		sbG.addAdjustmentListener(this);
+		sbB.addAdjustmentListener(this);
+		
+		changeColor();
+	}
+
+
+	public static void main(String[] args) {
+		new ColorSelector();
+	}
+
+
+	@Override
+	public void adjustmentValueChanged(AdjustmentEvent e) {
+		changeColor();
+	}
+
+
+	public void changeColor() {
 		int r = sbR.getValue();
 		int g = sbG.getValue();
 		int b = sbB.getValue();
 		
 		colorP.setBackground(new Color(r, g, b));
 		colorL.setText("R = " + r + " G = " + g + " B = " + b);
-	}
-
-
-	public static void main(String[] args) {
-		new ColorSelector();
 	}
 }
