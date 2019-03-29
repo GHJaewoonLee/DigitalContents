@@ -65,14 +65,14 @@ public class CalculatorService {
 					   }
 				
 					   if (!labelOperator.getText().isEmpty()) {
-						   second = Integer.parseInt(labelNum.getText());
+						   second = Double.parseDouble(labelNum.getText());
 						   second = calcTwoNumber(first, labelOperator.getText().charAt(0), second);
 						   labelNum.setText("" + second);
 						   labelOperator.setText(b.getLabel());
 						   break;
 					   }
 				
-					   first = Integer.parseInt(labelNum.getText());
+					   first = Double.parseDouble(labelNum.getText());
 					   labelOperator.setText(b.getLabel());
 					   isOperation = true;
 					   break;
@@ -82,7 +82,7 @@ public class CalculatorService {
 						   break;
 					   }
 				
-					   second = Integer.parseInt(labelNum.getText());
+					   second = Double.parseDouble(labelNum.getText());
 					   second = calcTwoNumber(first, labelOperator.getText().charAt(0), second);
 					   labelNum.setText("" + second);
 					   labelOperator.setText("");
