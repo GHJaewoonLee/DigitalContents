@@ -2,6 +2,7 @@ package com.kitri.awt.event;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -28,6 +29,9 @@ public class BaseBall extends Frame {
 	Panel pCS = new Panel();
 	Panel pC = new Panel();
 	
+	BaseBallController baseBallController;
+	FontColorChooser fontColorChooser = new FontColorChooser();
+	
 	
 	public BaseBall() {
 		super("BaseBall !!!");
@@ -47,6 +51,8 @@ public class BaseBall extends Frame {
 		pCS.add(l, "West");
 		pCS.add(tf, "Center");
 		
+		ta.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		ta.setEditable(false);
 		pC.add(ta, "Center");
 		pC.add(pCS, "South");
 		add(pC, "Center");
@@ -54,6 +60,23 @@ public class BaseBall extends Frame {
 		
 		setBounds(300, 200, 500, 400);
 		setVisible(true);
+		
+		
+		baseBallController = new BaseBallController(this);
+		
+		// BaseBall  Class Event
+		newG.addActionListener(baseBallController);
+		clear.addActionListener(baseBallController);
+		dap.addActionListener(baseBallController);
+		fontC.addActionListener(baseBallController);
+		exit.addActionListener(baseBallController);
+		tf.addActionListener(baseBallController);
+		
+		// FontColorChooser  Class Event
+		fontColorChooser.sbR.addAdjustmentListener(baseBallController);
+		fontColorChooser.sbG.addAdjustmentListener(baseBallController);
+		fontColorChooser.sbB.addAdjustmentListener(baseBallController);
+		fontColorChooser.ok.addActionListener(baseBallController);
 	}
 	
 	

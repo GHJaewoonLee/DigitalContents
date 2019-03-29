@@ -9,18 +9,14 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.TextArea;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 
 // CheckBox Group 변경 시 Choice 항목도 변경
 
 
 @SuppressWarnings("serial")
-public class ItemTest extends Frame implements ItemListener, ActionListener {
-
+public class ItemTest extends Frame {
+	
 	Panel pS = new Panel();
 	Panel pN = new Panel();
 	
@@ -37,6 +33,8 @@ public class ItemTest extends Frame implements ItemListener, ActionListener {
 	
 	Choice ch = new Choice();
 	Button exit = new Button("종료");
+	
+	ItemLogic itemLogic;
 	
 	
 	public ItemTest() {
@@ -68,56 +66,22 @@ public class ItemTest extends Frame implements ItemListener, ActionListener {
 		setBounds(300, 200, 300, 500);
 		setVisible(true);
 		
+		// Event 처리 부분을 분리
+		itemLogic = new ItemLogic(this);
 		
-		exit.addActionListener(this);
+		exit.addActionListener(itemLogic);
 		
-		mor.addItemListener(this);
-		aft.addItemListener(this);
-		eve.addItemListener(this);
-		app.addItemListener(this);
-		banana.addItemListener(this);
-		strawberry.addItemListener(this);
-		ch.addItemListener(this);
+		mor.addItemListener(itemLogic);
+		aft.addItemListener(itemLogic);
+		eve.addItemListener(itemLogic);
+		app.addItemListener(itemLogic);
+		banana.addItemListener(itemLogic);
+		strawberry.addItemListener(itemLogic);
+		ch.addItemListener(itemLogic);
 	}
 	
 	
 	public static void main(String[] args) {
 		new ItemTest();
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.exit(0);
-	}
-
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		Object ob = e.getSource();
-		
-		if (ob == ch) {
-			String str = ch.getSelectedItem();
-			
-			switch (str) {
-				case "아침" : mor.setState(true); break;
-				case "점심" : aft.setState(true); break;
-				case "저녁" : eve.setState(true); break;
-			}
-		}
-		
-		Checkbox sel = cg.getSelectedCheckbox();
-		String selStr = sel.getLabel();
-		
-		ta.setText("-- " + selStr + " --\n");
-		ta.append("1. 사과 : " + eatFood(app.getState()) + "\n");
-		ta.append("2. 바나나 : " + eatFood(banana.getState()) + "\n");
-		ta.append("3. 딸기 : " + eatFood(strawberry.getState()) + "\n");
-		
-		ch.select(selStr);
-	}
-	
-	private String eatFood(boolean flag) {
-		return flag ? "먹었다." : "안 먹었다.";
 	}
 }
