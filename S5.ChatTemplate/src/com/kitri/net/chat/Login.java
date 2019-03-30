@@ -1,13 +1,12 @@
 package com.kitri.net.chat;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 
+@SuppressWarnings("serial")
 public class Login extends JFrame {
 
 	JTextField ipTF = new JTextField();
@@ -31,49 +31,55 @@ public class Login extends JFrame {
 	EmptyBorder emb1 = new EmptyBorder(5, 5, 5, 5);
 	EmptyBorder emb2 = new EmptyBorder(5, 20, 5, 5);
 	
+	JColorChooser cc = new JColorChooser();
+	
 	JPanel p0 = new JPanel();
-	JPanel p00 = new JPanel();
 	JPanel p1 = new JPanel();
-	JPanel p11 = new JPanel();
-	JPanel p12 = new JPanel();
+	JPanel p2 = new JPanel();
 	JPanel p3 = new JPanel();
-		
+	JPanel p4 = new JPanel();
+	JPanel p5 = new JPanel();
+	
+	
 	public Login() {
 		super("Login!!");
 		
-		p11.setLayout(new BorderLayout(10, 0));
-		p11.setBackground(Color.WHITE);
-		p11.add(ip, "West");
-		p11.add(ipTF, "Center");
+		cc.setColor(JColorChooser.showDialog(this, "배경 색상 선택", getBackground()));
 		
-		p12.setLayout(new BorderLayout(10, 0));
-		p12.setBackground(Color.WHITE);
-		p12.add(chatName, "West");
-		p12.add(nameTF, "Center");
+		p5.setLayout(new BorderLayout(10, 0));
+		p5.setBackground(cc.getColor());
+		p5.add(ip, "West");
+		p5.add(ipTF, "Center");
 		
-		p1.setLayout(new GridLayout(2, 1, 0, 5));
-		p1.setBorder(emb2);		
-		p1.setBackground(Color.WHITE);
-		p1.add(p11);
-		p1.add(p12);
+		p4.setLayout(new BorderLayout(10, 0));
+		p4.setBackground(cc.getColor());
+		p4.add(chatName, "West");
+		p4.add(nameTF, "Center");
 		
-		p3.setLayout(new FlowLayout());
-		p3.setBackground(Color.WHITE);
-		p3.setBorder(eb);
-		p3.add(ok);
-		p3.add(Box.createRigidArea(new Dimension(20, 0)));
-		p3.add(cancel);
+		p3.setLayout(new GridLayout(2, 1, 0, 5));
+		p3.setBorder(emb2);		
+		p3.setBackground(cc.getColor());
+		p3.add(p5);
+		p3.add(p4);
 		
-		p00.setLayout(new BorderLayout(10, 10));
-		p00.setBorder(eb);
-		p00.setBackground(Color.WHITE);
-		p00.add(p1,"Center");
-		p00.add(p3, "South");
+		p2.setLayout(new FlowLayout());
+		p2.setBackground(cc.getColor());
+		p2.setBorder(eb);
+		p2.add(ok);
+		p2.add(Box.createHorizontalStrut(20));
+		p2.add(cancel);
 		
-		p0.setLayout(new BorderLayout(0, 0));
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(eb);
+		p1.setBackground(cc.getColor());
+		p1.add(p3,"Center");
+		p1.add(p2, "South");
+		
+		p0.setLayout(new BorderLayout());
 		p0.setBorder(emb1);
-		p0.setBackground(Color.WHITE);
-		p0.add(p00, "Center");
+		p0.setBackground(cc.getColor());
+		p0.add(p1, "Center");
+		
 		add(p0, "Center");
 		
 		setSize(250, 150);
