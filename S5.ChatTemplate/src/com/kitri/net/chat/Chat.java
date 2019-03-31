@@ -1,8 +1,6 @@
 package com.kitri.net.chat;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
@@ -11,6 +9,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -21,7 +20,7 @@ import javax.swing.border.EtchedBorder;
 public class Chat extends JFrame{
 
 	JTextArea area = new JTextArea();
-	JList<String> list = new JList<String>();
+	JList<Object> list = new JList<Object>();
 	
 	JTextField globalSend = new JTextField();
 	JTextField whomSend = new JTextField();
@@ -39,17 +38,13 @@ public class Chat extends JFrame{
 	EmptyBorder emb1, emb2, emb3;
 	CompoundBorder cb, cb2;
 	
-	JPanel p0 = new JPanel();
-	JPanel p1 = new JPanel();
-	JPanel p2 = new JPanel();
-	JPanel p3 = new JPanel();
-	JPanel p4 = new JPanel();
-	JPanel p5 = new JPanel();
-	JPanel p6 = new JPanel();
-	JPanel p7 = new JPanel();
-	JPanel p8 = new JPanel();
+	JPanel p = new JPanel();
 	
-		
+	GroupLayout gl = new GroupLayout(p);
+	GroupLayout.SequentialGroup hGroup = gl.createSequentialGroup();
+	GroupLayout.SequentialGroup vGroup = gl.createSequentialGroup();
+
+	
 	public Chat() {
 		super("Αρ°ΕΏξ Γ€ΖΓ.. ^^*");
 		
@@ -63,67 +58,39 @@ public class Chat extends JFrame{
 		EmptyBorder emb3 = new EmptyBorder(0, 0, 0, 30);
 		CompoundBorder cb = new CompoundBorder(bbL, ebR);
 		CompoundBorder cb2 = new CompoundBorder(bbL2, emb2);
+		CompoundBorder cb3 = new CompoundBorder(emb1, ebR);
 		
-		
-		p8.setLayout(new BorderLayout());
-		p8.setBackground(cc.getColor());
+		area.setBorder(ebR);
+		globalSend.setBorder(ebR);
 		whom.setBorder(emb3);
 		whom.setBackground(cc.getColor());
 		whom.setForeground(cc.getColor().darker());
-		p8.add(whom, "West");
 		whomSend.setBorder(ebR);
-		p8.add(whomSend, "Center");
-
-		p7.setLayout(new GridLayout(2, 1, 0, 5));
-		p7.setBackground(cc.getColor());
-		globalSend.setBorder(ebR);
-		p7.add(globalSend);
-		p7.add(p8);
-				
-		p6.setLayout(new BorderLayout(0, 5));
-		p6.setBackground(cc.getColor());
-		area.setBorder(ebR);
-		p6.add(area, "Center");
-		p6.add(p7, "South");
 		
-		p5.setLayout(new GridLayout(3, 1, 0, 5));
-		p5.setBackground(cc.getColor());
-		rename.setBorder(cb2);
-		p5.add(rename);
-		paper.setBorder(cb2);
-		p5.add(paper);
-		close.setBorder(cb2);
-		p5.add(close);
-		
-		p4.setLayout(new BorderLayout(0, 5));
-		p4.setBackground(cc.getColor());
 		list.setBorder(cb);
-		p4.add(list, "Center");
-		p4.add(p5, "South");
+		rename.setBorder(cb2);
+		paper.setBorder(cb2);
+		close.setBorder(cb2);
 		
-		p3.setLayout(new BorderLayout());
-		p3.setBackground(cc.getColor());
-		p3.add(p4);
+		gl.setAutoCreateGaps(true);
+		gl.setAutoCreateContainerGaps(true);
+		hGroup.addGroup(gl.createSequentialGroup().addGroup(gl.createParallelGroup().addComponent(area).addComponent(globalSend).addGroup(gl.createSequentialGroup().addComponent(whom).addComponent(whomSend)))
+												  .addGroup(gl.createParallelGroup().addComponent(list).addComponent(rename).addComponent(paper).addComponent(close)));
+		gl.setHorizontalGroup(hGroup);
+		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE).addComponent(area).addComponent(list, Alignment.LEADING).addComponent(rename, Alignment.TRAILING));
+		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE).addComponent(globalSend).addComponent(paper));
+		vGroup.addGroup(gl.createParallelGroup(Alignment.BASELINE).addComponent(whom).addComponent(whomSend).addComponent(close));
 		
-		p2.setLayout(new BorderLayout(5, 0));
-		p2.setBackground(cc.getColor());
-		p2.setBorder(emb1);
-		p2.add(p3, "East");
-		p2.add(p6, "Center");
+		gl.setVerticalGroup(vGroup);
 		
-		p1.setLayout(new BorderLayout(5, 5));
-		p1.setBorder(ebR);
-		p1.add(p2);
+		p.setLayout(gl);
+		p.setBackground(cc.getColor());
+		p.setBorder(cb3);
 		
-		p0.setLayout(new BorderLayout());
-		p0.setBackground(cc.getColor());
-		p0.setBorder(emb1);
-		p0.add(p1, "Center");
-		
-		add(p0, "Center");
+		add(p);
 		
 		setSize(470, 345);
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}

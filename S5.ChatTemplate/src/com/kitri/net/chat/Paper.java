@@ -1,8 +1,5 @@
 package com.kitri.net.chat;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -11,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -33,25 +31,22 @@ public class Paper extends JFrame {
 	
 	EtchedBorder ebL = new EtchedBorder(EtchedBorder.LOWERED);
 	EmptyBorder emb1 = new EmptyBorder(5, 5, 5, 5);
-	EmptyBorder emb2 = new EmptyBorder(0, 10, 0, 10);
-	EmptyBorder emb3 = new EmptyBorder(0, 0, 0, 10);
-	EmptyBorder emb4 = new EmptyBorder(0, 15, 0, 15);
+	EmptyBorder emb2 = new EmptyBorder(0, 15, 0, 15);
 	BevelBorder bbL = new BevelBorder(BevelBorder.RAISED);
-	CompoundBorder cb1 = new CompoundBorder(ebL, emb1);
-	CompoundBorder cb2 = new CompoundBorder(bbL, emb4);
+	CompoundBorder cb1 = new CompoundBorder(emb1, ebL);
+	CompoundBorder cb2 = new CompoundBorder(bbL, emb2);
 	
 	JColorChooser cc = new JColorChooser();
 	
-	JPanel p0 = new JPanel();
 	JPanel p1 = new JPanel();
 	JPanel p2 = new JPanel();
 	JPanel p3 = new JPanel();
-	JPanel p4 = new JPanel();
-	JPanel p5 = new JPanel();
-	JPanel p6 = new JPanel();
-	JPanel p7 = new JPanel();
 	
-	GroupLayout gl = new GroupLayout(p7);
+	GroupLayout gl = new GroupLayout(p2);
+	GroupLayout gl2 = new GroupLayout(p3);
+	GroupLayout gl3 = new GroupLayout(p1);
+	GroupLayout.SequentialGroup hGroup = gl3.createSequentialGroup();
+	GroupLayout.SequentialGroup vGroup = gl3.createSequentialGroup();
 	
 	
 	public Paper() {
@@ -59,62 +54,45 @@ public class Paper extends JFrame {
 		
 		cc.setColor(JColorChooser.showDialog(this, "배경 색상 선택", getBackground()));
 		
+		from.setEditable(false);
+		from.setBackground(cc.getColor().darker());
+		to.setEditable(false);
+		to.setBackground(cc.getColor().darker());
+		
+		gl2.setAutoCreateGaps(true);
+		gl2.setAutoCreateContainerGaps(true);
+		gl2.setHorizontalGroup(gl2.createSequentialGroup().addComponent(f).addComponent(from).addComponent(t).addComponent(to));
+		gl2.setVerticalGroup(gl2.createSequentialGroup().addGroup(gl2.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(f).addComponent(from).addComponent(t).addComponent(to)));
+		
+		p3.setLayout(gl2);
+		p3.setBackground(cc.getColor());
+		
+		cancel.setBorder(cb2);
+		send.setBorder(cb2);
+		
 		gl.setAutoCreateGaps(false);
 		gl.setAutoCreateContainerGaps(false);
 		gl.setHorizontalGroup(gl.createSequentialGroup().addComponent(send).addGap(5).addComponent(cancel));
 		gl.setVerticalGroup(gl.createSequentialGroup().addGroup(gl.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(send).addComponent(cancel)));
 		
-		cancel.setBorder(cb2);
-		send.setBorder(cb2);
-		p7.setLayout(gl);
-		p7.setBackground(cc.getColor());
-		p7.setBorder(ebL);
-		
-		p6.setBackground(cc.getColor());
-		p6.add(p7);
-		
-		p5.setLayout(new BorderLayout());
-		p5.setBackground(cc.getColor());
-		t.setBorder(emb3);
-		p5.add(t, "West");
-		to.setBorder(emb2);
-		to.setEditable(false);
-		to.setBackground(cc.getColor().darker());
-		p5.add(to, "Center");
-		
-		p4.setLayout(new BorderLayout());
-		p4.setBackground(cc.getColor());
-		f.setBorder(emb3);
-		p4.add(f, "West");
-		from.setBorder(emb2);
-		from.setEditable(false);
-		from.setBackground(cc.getColor().darker());
-		p4.add(from, "Center");
-				
-		p3.setLayout(new GridLayout(1, 2, 15, 0));
-		p3.setBackground(cc.getColor());
-		p3.setBorder(emb2);
-		p3.add(p4);
-		p3.add(p5);
-		
-		p2.setLayout(new BorderLayout(5, 5));
+		p2.setLayout(gl);
 		p2.setBackground(cc.getColor());
-		letter.setBorder(ebL);
-		p2.add(letter, "Center");
-		p2.add(p3, "North");
-		p2.add(p6, "South");
+		p2.setBorder(ebL);
 		
-		p1.setLayout(new BorderLayout());
+		gl3.setAutoCreateGaps(true);
+		gl3.setAutoCreateContainerGaps(true);
+		hGroup.addGroup(gl3.createParallelGroup().addComponent(p3).addComponent(letter).addComponent(p2, Alignment.CENTER));
+		gl3.setHorizontalGroup(hGroup);
+		vGroup.addGroup(gl3.createParallelGroup().addComponent(p3));
+		vGroup.addGroup(gl3.createParallelGroup().addComponent(letter));
+		vGroup.addGroup(gl3.createParallelGroup(Alignment.BASELINE).addComponent(p2, Alignment.CENTER));
+		gl3.setVerticalGroup(vGroup);
+		
+		p1.setLayout(gl3);
 		p1.setBackground(cc.getColor());
 		p1.setBorder(cb1);
-		p1.add(p2, "Center");
 		
-		p0.setLayout(new BorderLayout());
-		p0.setBackground(cc.getColor());
-		p0.setBorder(emb1);
-		p0.add(p1, "Center");
-		
-		add(p0, "Center");
+		add(p1);
 		
 		setSize(300, 305);
 		setResizable(true);
