@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Scrollbar;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 @SuppressWarnings("serial")
@@ -70,5 +72,12 @@ public class FontColorChooser extends Frame {
 		add(p2, "East");
 		
 		setBounds(300, 200, 500, 400);
+		
+		addWindowListener(new WindowAdapter() {
+							@Override
+							public void windowClosing(WindowEvent e) {
+								setVisible(false);
+							} 
+						  });
 	}
 }

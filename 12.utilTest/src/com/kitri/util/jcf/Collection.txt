@@ -1,0 +1,14 @@
+JCF (Java Collection Framework) : 크기가 유동적 (배열과의 큰 차이점)
+
+		Collection															Map
+		(넣기, 제거)
+		
+List					SET
+순서유지O				   순서유지X
+중복O						중복X (중복 시 기존 data 덮어씀)
+(게시판)				(장바구니, ...)
+-----------------------------------------------------------------------------------------------
+
+ArrayList			  HashSet									HashMap				Hashtable
+
+Vector																				Properties

@@ -46,7 +46,7 @@ public class BaseBall extends Frame {
 		pE.add(dap);
 		pE.add(fontC);
 		pE.add(exit);
-		
+		 
 		pCS.setLayout(new BorderLayout(10, 0));
 		pCS.add(l, "West");
 		pCS.add(tf, "Center");
@@ -72,11 +72,15 @@ public class BaseBall extends Frame {
 		exit.addActionListener(baseBallController);
 		tf.addActionListener(baseBallController);
 		
+		addWindowListener(baseBallController);
+		
 		// FontColorChooser  Class Event
 		fontColorChooser.sbR.addAdjustmentListener(baseBallController);
 		fontColorChooser.sbG.addAdjustmentListener(baseBallController);
 		fontColorChooser.sbB.addAdjustmentListener(baseBallController);
 		fontColorChooser.ok.addActionListener(baseBallController);
+		
+		//fontColorChooser.addWindowListener(baseBallController);
 	}
 	
 	
