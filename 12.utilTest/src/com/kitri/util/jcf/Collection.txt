@@ -9,6 +9,6 @@ List					SET
 (게시판)				(장바구니, ...)
 -----------------------------------------------------------------------------------------------
 
-ArrayList			  HashSet									HashMap				Hashtable
+ArrayList			  HashSet									HashMap				Hashtable (순서 보장 - 쓰레드 환경)
 
-Vector																				Properties
+Vector (순서 보장 - 쓰레드 환경)															Properties

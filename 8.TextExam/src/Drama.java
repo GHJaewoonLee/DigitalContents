@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Drama extends TVProgram {
 
@@ -7,17 +6,13 @@ public class Drama extends TVProgram {
 	private String actress;
 	
 		
-	public Drama(String director, String actor, String actress) {
-		super(null, null);
+	public Drama(String title, String broadcast, String director) {
+		super(title, broadcast);
 		this.director = director;
-		this.actor = actor;
-		this.actress = actress;
 	}
 
 	public Drama(String title, String broadcast, String director, String actor, String actress) {
-		super(title, broadcast);
-		
-		this.director = director;
+		this(title, broadcast, director);
 		this.actor = actor;
 		this.actress = actress;
 	}
@@ -26,18 +21,14 @@ public class Drama extends TVProgram {
 	public String toString() {
 		String str = "";
 		
-		if (!Objects.isNull(director)) {
-			str += "\t- 감독 : " + director;
-		}
-		
-		if (!Objects.isNull(actor)) {
+		if (actor != null) {
 			str += ("\n\t- 남자배우 : " + actor);
 		}
 		
-		if (!Objects.isNull(actress)) {
+		if (actress != null) {
 			str += ("\n\t- 여자배우 : " + actress);
 		}
 		
-		return super.toString() + str + "\n"; 
+		return super.toString() + "\t- 감독 : " + director + str + "\n"; 
 	}
 }

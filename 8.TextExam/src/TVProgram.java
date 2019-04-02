@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 
 public class TVProgram {
 
@@ -14,16 +12,6 @@ public class TVProgram {
 
 	@Override
 	public String toString() {
-		String str = "";
-		
-		if (!Objects.isNull(title)) {
-			str += title;
-		}
-		
-		if (!Objects.isNull(broadcast)) {
-			str += " (" + broadcast + ")";
-		}
-		
-		return str + "\n";
+		return title + " (" + broadcast + ")\n";
 	}
 }

@@ -1,0 +1,20 @@
+Error
+
+1. 문법에러
+2. 논리에러
+3. 시스템에러
+
+
+	Exception Handling
+
+             Exception ----- Runtime Exception : 예외처리 X
+             		   |						 Logic 처리 필요 (구현 상에서 처리) - 주로 if문을 사용
+             		   |
+             		   |
+                       ----- Non-Runtime Exception : 반드시 코드 상에서 예외처리 필요
+                       
+                       
+             1. throws : 호출부에서 처리를 하는 방법
+             
+             2. try ~ catch [catch ...] [finally] : 실행부에서 처리를 하는 방법
+													상위 Exception이 하위 Exception보다 먼저 올 수 없음.

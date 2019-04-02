@@ -1,0 +1,21 @@
+입력장치						App(Java)						출력장치
+
+키보드														모니터
+마우스		Input Stream				Output Stream		파일
+파일			----------->				------------>		네트워크
+네트워크		   Input						Result			...
+...
+
+
+
+I/O (입출력)   java.io
+
+
+---- ByteStream : 모든 data를 1byte로 처리 (~Stream)
+|	 (NodeStream)
+|
+|
+---- CharacterStream : 모든 data를 2byte로 처리    ----- Input : ~Reader 
+	 (FilterStream)							  |
+	 										  |
+	 										  ----- Output : ~Writer
