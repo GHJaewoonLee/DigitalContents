@@ -207,7 +207,7 @@ public class HaksaDao {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			c = DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.32:1521:orcl", "kitri", "kitri");
 			
-			ps = c.prepareStatement("select * from haksa_main");
+			ps = c.prepareStatement("select age, name, h.job_code \"job_code\", job_value, j.job_name \"job_name\" from haksa_main h, job_table j where h.job_code = j.job_code");
 			
 			rs = ps.executeQuery();
 			
@@ -218,27 +218,9 @@ public class HaksaDao {
 				haksaDto.setName(rs.getString("name"));
 				haksaDto.setKey(rs.getInt("job_code"));
 				haksaDto.setValue(rs.getString("job_value"));
+				haksaDto.setKeyName(rs.getString("job_name"));
 				
 				list.add(haksaDto);
-			}
-			
-			rs.close();
-			ps.close();
-			
-			int len = list.size();
-			for (int i = 0 ; i < len ; i++) {
-				ps = c.prepareStatement("select job_name from job_table where job_code = (select job_code from haksa_main where name = (?))");
-				
-				ps.setString(1, list.get(i).getName());
-				
-				rs = ps.executeQuery();
-				
-				while (rs.next()) {
-					haksaDto.setKeyName(rs.getString("job_name"));
-				}
-				
-				rs.close();
-				ps.close();
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
