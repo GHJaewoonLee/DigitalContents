@@ -1,0 +1,12 @@
+Process : 하나의 CPU가 처리하는 Program의 단위
+
+Thread : 하나의 Program에서 처리되는 작업(기능)단위
+
+
+												대기
+												sleep()
+												
+생성							준비					실행							중지
+(new Thread)				start()...			run() ...
+(new Thread(Runnable)
+												종료

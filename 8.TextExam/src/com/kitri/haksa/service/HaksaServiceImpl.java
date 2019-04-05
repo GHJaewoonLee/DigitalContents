@@ -11,13 +11,12 @@ import com.kitri.haksa.data.HaksaDto;
 
 public class HaksaServiceImpl implements HaksaService {
 
-	private ArrayList<HaksaDto> list;
-	private String[] job = {"학번", "과목", "부서"};
 	private BufferedReader in;
 	
+	private HaksaDao haksaDao;
 	
 	public HaksaServiceImpl() {
-		list = new ArrayList<HaksaDto>();
+		haksaDao = new HaksaDao();
 		in = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
@@ -69,6 +68,7 @@ public class HaksaServiceImpl implements HaksaService {
 	@Override
 	public void registerMenu() {
 		boolean continued = true;
+		HaksaDto haksaDto;
 		
 		while (continued) {
 			String age;
@@ -122,20 +122,20 @@ public class HaksaServiceImpl implements HaksaService {
 				
 				value = in.readLine();
 				
-				register(new HaksaDto(Integer.parseInt(age), name, menuRegisterNum, value));
+				haksaDto = new HaksaDto();
+				haksaDto.setAge(Integer.parseInt(age));
+				haksaDto.setName(name);
+				haksaDto.setKey(menuRegisterNum);
+				haksaDto.setValue(value);
+				
+				haksaDao.register(haksaDto);
+				
 			} catch (IOException e) {
 				System.out.println("IO Exception이 발생하였습니다.");
 				e.printStackTrace();
 				processExit();
 			}
 		}
-	}
-
-	@Override
-	public void register(HaksaDto haksa) {
-		list.add(haksa);
-		
-		System.out.println("등록되었습니다.");
 	}
 
 	@Override
@@ -149,10 +149,10 @@ public class HaksaServiceImpl implements HaksaService {
 				System.out.print("이름 : ");
 
 				String name = in.readLine();
-				haksaDto = findName(name);
+				haksaDto = haksaDao.findName(name);
 				
 				if (haksaDto != null) {
-					System.out.println("나이 : " + haksaDto.getAge() + "\t\t\t" + "이름 : " + haksaDto.getName() + "\t\t" + job[haksaDto.getKey() - 1] + " : " + haksaDto.getValue());
+					System.out.println("나이 : " + haksaDto.getAge() + "\t\t\t" + "이름 : " + haksaDto.getName() + "\t\t" + haksaDto.getKeyName() + " : " + haksaDto.getValue());
 				} else {
 					System.out.println(name + "님은 없습니다.");
 				}
@@ -181,22 +181,6 @@ public class HaksaServiceImpl implements HaksaService {
 	}
 
 	@Override
-	public HaksaDto findName(String name) {
-		HaksaDto haksaDto = null;
-		ListIterator<HaksaDto> listIterator = list.listIterator();
-		
-		while (listIterator.hasNext()) {
-			haksaDto = listIterator.next();
-
-			if (name.equals(haksaDto.getName())) {
-				return haksaDto;
-			}
-		}
-		
-		return null;
-	}
-
-	@Override
 	public void deleteMenu() {
 		boolean continued = true; 
 		
@@ -207,13 +191,13 @@ public class HaksaServiceImpl implements HaksaService {
 				System.out.print("이름 : ");
 				
 				String name = in.readLine();
-				result = delete(name);
+				result = haksaDao.delete(name);
 				
 				switch (result) {
-					case 0 : System.out.println(name + "님을 삭제하였습니다.");
+					case 1 : System.out.println(name + "님을 삭제하였습니다.");
 							 break;
 							 
-					case -1 : System.out.println(name + "님은 없습니다.");
+					case 0 : System.out.println(name + "님은 없습니다.");
 							  break;
 							  
 				    default : System.out.println("알 수 없는 문제가 발생하였습니다.");
@@ -243,34 +227,17 @@ public class HaksaServiceImpl implements HaksaService {
 	}
 
 	@Override
-	public int delete(String name) {
-		HaksaDto haksaDto = findName(name);
-		
-		if (haksaDto != null) {
-			list.remove(haksaDto);
-			return 0;
-		} else {
-			return -1;
-		}
-	}
-
-	@Override
 	public void selectAll() {
 		boolean continued = true;
 		ListIterator<HaksaDto> listIterator;
 		HaksaDto haksaDto = null;
 		
 		while (continued) {
-			if (list.size() == 0) {
-				System.out.println("데이터가 없습니다.");
-				break;
-			}
-			
-			listIterator = list.listIterator();
+			listIterator = haksaDao.selectAllList().listIterator();
 			
 			while (listIterator.hasNext()) {
 				haksaDto = listIterator.next();
-				System.out.println("나이 : " + haksaDto.getAge() + "\t\t\t" + "이름 : " + haksaDto.getName() + "\t\t" + job[haksaDto.getKey() - 1] + " : " + haksaDto.getValue());
+				System.out.println("나이 : " + haksaDto.getAge() + "\t\t\t" + "이름 : " + haksaDto.getName() + "\t\t" + haksaDto.getKeyName() + " : " + haksaDto.getValue());
 			}
 			
 			System.out.print("계속 하시려면 1, 종료 하시려면 0을 입력해 주세요 ");

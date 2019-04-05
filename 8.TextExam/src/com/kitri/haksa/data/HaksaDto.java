@@ -6,16 +6,9 @@ public class HaksaDto {
 	private int age;
 	private String name;
 	private int key;
+	private String keyName;
 	private String value;
 	
-	
-	public HaksaDto(int age, String name, int key, String value) {
-		this.age = age;
-		this.name = name;
-		this.key = key;
-		this.value = value;
-	}
-
 
 	public int getAge() {
 		return age;
@@ -39,6 +32,14 @@ public class HaksaDto {
 
 	public void setKey(int key) {
 		this.key = key;
+	}
+	
+	public String getKeyName() {
+		return keyName;
+	}
+
+	public void setKeyName(String keyName) {
+		this.keyName = keyName;
 	}
 
 	public String getValue() {
