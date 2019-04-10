@@ -31,4 +31,6 @@ public class ChatConstance {
 	public static final int SC_PAPER = 300;
 	public static final int SC_RENAME = 400;
 	public static final int SC_DISCONNECT = 900;
+	
+	public static final String INDICATOR = "%&%&%";
 }

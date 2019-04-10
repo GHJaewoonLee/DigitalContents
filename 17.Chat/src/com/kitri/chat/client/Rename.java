@@ -8,9 +8,10 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.SwingUtilities;
+//import javax.swing.border.SoftBevelBorder;
+//import javax.swing.SwingUtilities;
 
+@SuppressWarnings("serial")
 public class Rename extends javax.swing.JFrame {
 	JLabel old;
 	JTextField newname;

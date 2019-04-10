@@ -1,8 +1,8 @@
 package com.kitri.chat.client;
 import java.awt.CardLayout;
-import javax.swing.BorderFactory;
+//import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JEditorPane;
+//import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,8 +11,9 @@ import javax.swing.SwingConstants;
 
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.SwingUtilities;
+//import javax.swing.SwingUtilities;
 
+@SuppressWarnings("serial")
 public class Paper extends javax.swing.JFrame {
 	JLabel fl;
 	JLabel tl;
