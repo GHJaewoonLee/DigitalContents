@@ -457,6 +457,7 @@ public class Login extends JFrame implements ActionListener, ListSelectionListen
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
+				break;
 			}
 		}
 	}
